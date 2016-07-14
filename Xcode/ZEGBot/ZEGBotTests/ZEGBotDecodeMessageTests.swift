@@ -324,6 +324,19 @@ class ZEGBotDecodeMessageTests: XCTestCase {
 		
 	}
 	
+	func testDecodeCallbackQuery() {
+	
+		let updateString = "{\"update_id\":719551526,\"callback_query\":{\"id\":\"345953710243863098\",\"inline_message_id\":\"345953710243863098\",\"from\":{\"id\":80548625,\"first_name\":\"Shane\",\"last_name\":\"Qi\",\"username\":\"ShaneQi\"},\"message\":{\"message_id\":52593,\"from\":{\"id\":199112411,\"first_name\":\"zeg_bot\",\"username\":\"zeg_bot\"},\"chat\":{\"id\":80548625,\"first_name\":\"Shane\",\"last_name\":\"Qi\",\"username\":\"ShaneQi\",\"type\":\"private\"},\"date\":1468526110,\"text\":\"testSendMessage\",\"entities\":[{\"type\":\"text_link\",\"offset\":0,\"length\":15,\"url\":\"https:\\/\\/google.com\\/\"}]},\"data\":\"jsonData\"}}"
+		
+		let update = ZEGDecoder.decodeUpdate(updateString)
+		XCTAssert(update?.callback_query?.data == "jsonData")
+		XCTAssert(update?.callback_query?.id == "345953710243863098")
+		XCTAssert(update?.callback_query?.inline_message_id == "345953710243863098")
+		XCTAssert(update?.callback_query?.from.username == "ShaneQi")
+		XCTAssert(update?.callback_query?.message?.text == "testSendMessage")
+		
+	}
+	
 //    func testPerformanceExample() {
 //        // This is an example of a performance test case.
 //        self.measureBlock {

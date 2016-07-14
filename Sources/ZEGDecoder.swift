@@ -53,8 +53,9 @@ public class ZEGDecoder {
 		/* OPTIONAL */
 		let message: Message? = decodeMessage(jsonDictionary["message"])
 		let edited_message: Message? = decodeMessage(jsonDictionary["edited_message"])
+		let callback_query: CallbackQuery? = decodeCallbackQuery(jsonDictionary["callback_query"])
 		
-		return Update(update_id: update_id, message: message, edited_message: edited_message)
+		return Update(update_id: update_id, message: message, edited_message: edited_message, callback_query: callback_query)
 		
 	}
 	
@@ -893,6 +894,66 @@ public class ZEGDecoder {
 		
 		return Venue(location: location, title: title, address: address, foursquare_id: foursquare_id)
 	
+	}
+	
+	static func decodeCallbackQuery(jsonConvertibleObject: Any?) -> CallbackQuery? {
+		
+		do {
+			
+			let callbackQuery: CallbackQuery = try decodeCallbackQuery(jsonConvertibleObject)
+			return callbackQuery
+			
+		} catch {
+			
+			return nil
+			
+		}
+		
+	}
+	
+	static func decodeCallbackQuery(jsonConvertibleObject: Any?) throws -> CallbackQuery {
+		
+		guard jsonConvertibleObject != nil else {
+			
+			throw ZEGDecoderError.BadInput("Input is empty.")
+			
+		}
+		
+		guard (jsonConvertibleObject is [String: Any]) else {
+			
+			throw ZEGDecoderError.BadInput("Input type is incorrect.")
+			
+		}
+		
+		let jsonDictionary = jsonConvertibleObject as! [String: Any]
+		
+		guard let id = jsonDictionary["id"] as? String else {
+			
+			throw ZEGDecoderError.BadRequiredFieldValue("Field 'id'.")
+			
+		}
+		
+		var from: User
+		do {
+			
+			from = try decodeUser(jsonDictionary["from"])
+			
+		} catch let e {
+			
+			throw e
+			
+		}
+		
+		guard let data = jsonDictionary["data"] as? String else {
+			
+			throw ZEGDecoderError.BadRequiredFieldValue("Field 'data'.")
+			
+		}
+		
+		let message: Message? = decodeMessage(jsonDictionary["message"])
+		let inline_message_id = jsonDictionary["inline_message_id"] as? String
+		
+		return CallbackQuery(id: id, from: from, data: data, message: message, inline_message_id: inline_message_id)
 	}
 	
 }

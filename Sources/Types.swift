@@ -17,11 +17,12 @@ public struct Update {
 	var edited_message: Message?
 	//	var inline_query: InlineQuery?
 	//	var chosen_inline_result: ChosenInlineResult?
-	//	var callback_query: CallbackQuery?
+	var callback_query: CallbackQuery?
 	
 	init(update_id: Int,
 	     message: Message?,
-	     edited_message: Message?
+	     edited_message: Message?,
+	     callback_query: CallbackQuery?
 		//		 inline_query: InlineQuery?,
 		//		 chosen_inline_result: ChosenInlineResult?,
 		//		 callback_query: CallbackQuery?
@@ -30,6 +31,7 @@ public struct Update {
 		self.update_id = update_id
 		self.edited_message = edited_message
 		self.message = message
+		self.callback_query = callback_query
 		//		self.inline_query = inline_query
 		//		self.chosen_inline_result = chosen_inline_result
 		//		self.callback_query = callback_query
@@ -558,6 +560,31 @@ public struct InlineKeyboardMarkup {
 	
 	init(inline_keyboard: [[InlineKeyboardButton]]) {
 		self.inline_keyboard = inline_keyboard
+	}
+	
+}
+
+public struct CallbackQuery {
+	
+	var id: String
+	var from: User
+	var data: String
+	
+	var message: Message?
+	var inline_message_id: String?
+	
+	init(id: String,
+	     from: User,
+	     data: String,
+	     message: Message?,
+	     inline_message_id: String?) {
+		
+		self.id = id
+		self.from = from
+		self.data = data
+		self.message = message
+		self.inline_message_id = inline_message_id
+	
 	}
 	
 }

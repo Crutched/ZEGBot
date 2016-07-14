@@ -24,6 +24,7 @@ class ZEGBotResponseTests: XCTestCase {
 	var contact: Contact!
 	var button1: InlineKeyboardButton!
 	var button2: InlineKeyboardButton!
+	var button3: InlineKeyboardButton!
 	var inlineKeyboardMarkup: InlineKeyboardMarkup!
 	
 	override func setUp() {
@@ -42,8 +43,9 @@ class ZEGBotResponseTests: XCTestCase {
 		venue = Venue(location: location, title: "Estates of Richardson", address: "955 W President George Bush", foursquare_id: "56d8a428cd10569560386b1e")
 		contact = Contact(phone_number: "14696423333", first_name: "Shane", last_name: "Qi", user_id: 80548625)
 		button1 = InlineKeyboardButton(text: "button1", url: "https://google.com", callback_data: nil, switch_inline_query: nil)
-		button2 = InlineKeyboardButton(text: "button2", url: "", callback_data: nil, switch_inline_query: "hello")
-		inlineKeyboardMarkup = InlineKeyboardMarkup(inline_keyboard: [[button1, button2],[button1, button2]])
+		button2 = InlineKeyboardButton(text: "button2", url: nil, callback_data: nil, switch_inline_query: "hello")
+		button3 = InlineKeyboardButton(text: "button3", url: nil, callback_data: "jsonData", switch_inline_query: nil)
+		inlineKeyboardMarkup = InlineKeyboardMarkup(inline_keyboard: [[button1, button2, button3],[button1, button2, button3]])
 		
 	}
 	

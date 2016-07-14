@@ -22,6 +22,9 @@ class ZEGBotResponseTests: XCTestCase {
 	var location: Location!
 	var venue: Venue!
 	var contact: Contact!
+	var button1: InlineKeyboardButton!
+	var button2: InlineKeyboardButton!
+	var inlineKeyboardMarkup: InlineKeyboardMarkup!
 	
 	override func setUp() {
 		super.setUp()
@@ -38,6 +41,9 @@ class ZEGBotResponseTests: XCTestCase {
 		location = Location(longitude: -96.739769, latitude: 33.000869)
 		venue = Venue(location: location, title: "Estates of Richardson", address: "955 W President George Bush", foursquare_id: "56d8a428cd10569560386b1e")
 		contact = Contact(phone_number: "14696423333", first_name: "Shane", last_name: "Qi", user_id: 80548625)
+		button1 = InlineKeyboardButton(text: "button1", url: "https://google.com", callback_data: nil, switch_inline_query: nil)
+		button2 = InlineKeyboardButton(text: "button2", url: "", callback_data: nil, switch_inline_query: "hello")
+		inlineKeyboardMarkup = InlineKeyboardMarkup(inline_keyboard: [[button1, button2],[button1, button2]])
 		
 	}
 	
@@ -48,9 +54,9 @@ class ZEGBotResponseTests: XCTestCase {
 	
 	func testSendMessage() {
 		
-		ZEGResponse.sendMessage(to: chat, text: "[testSendMessage](https://google.com)", parse_mode: .Markdown, disable_web_page_preview: true, disable_notification: true)
+		ZEGResponse.sendMessage(to: chat, text: "[testSendMessage](https://google.com)", parse_mode: .Markdown, disable_web_page_preview: true, disable_notification: true, reply_markup: nil)
 		
-		ZEGResponse.sendMessage(to: message, text: "<a href='https://google.com'>testSendMessage</a>", parse_mode: .HTML, disable_web_page_preview: false, disable_notification: false)
+		ZEGResponse.sendMessage(to: message, text: "<a href='https://google.com'>testSendMessage</a>", parse_mode: .HTML, disable_web_page_preview: false, disable_notification: false, reply_markup: nil)
 	
 	}
 	
@@ -118,6 +124,11 @@ class ZEGBotResponseTests: XCTestCase {
 	
 		ZEGResponse.sendChatAction(to: message, action: .typing)
 	
+	}
+	
+	func testReplyMarkup() {
+
+		ZEGResponse.sendMessage(to: chat, text: "[testSendMessage](https://google.com)", parse_mode: .Markdown, disable_web_page_preview: true, disable_notification: true, reply_markup: inlineKeyboardMarkup)
 	}
 	
 }

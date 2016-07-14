@@ -529,3 +529,35 @@ public struct Venue {
 	
 }
 
+public struct InlineKeyboardButton {
+
+	var text: String
+	
+	var url: String?
+	var callback_data: String?
+	var switch_inline_query: String?
+	
+	init(text: String,
+		 url: String?,
+		 callback_data: String?,
+		 switch_inline_query: String?
+		) {
+	
+		self.text = text
+		self.url = url
+		self.callback_data = callback_data
+		self.switch_inline_query = switch_inline_query
+	
+	}
+	
+}
+
+public struct InlineKeyboardMarkup {
+
+	var inline_keyboard: [[InlineKeyboardButton]]
+	
+	init(inline_keyboard: [[InlineKeyboardButton]]) {
+		self.inline_keyboard = inline_keyboard
+	}
+	
+}

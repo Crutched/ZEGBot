@@ -15,7 +15,7 @@ public class ZEGResponse {
 	static private var cUrl = CURL()
 	static private var urlPrefix = "https://api.telegram.org/bot"+token+"/"
 	
-	static func sendMessage(to receiver: Receivable, text: String, parse_mode: ParseMode?, disable_web_page_preview: Bool?, disable_notification: Bool?) {
+	static func sendMessage(to receiver: Receivable, text: String, parse_mode: ParseMode?, disable_web_page_preview: Bool?, disable_notification: Bool?, reply_markup: ReplyMarkup?) {
 	
 		var params = receiver.params
 		
@@ -23,7 +23,8 @@ public class ZEGResponse {
 		if let parse_mode = parse_mode { params["parse_mode"] = parse_mode.rawValue }
 		if let disable_web_page_preview = disable_web_page_preview { params["disable_web_page_preview"] = "\(disable_web_page_preview)" }
 		if let disable_notification = disable_notification { params["disable_notification"] = "\(disable_notification)" }
-	
+		if let reply_markup = reply_markup { params["reply_markup"] = reply_markup.JSONEncode() }
+		
 		performResponse("sendMessage", params: params)
 		
 	}

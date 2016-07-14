@@ -15,6 +15,12 @@ protocol Receivable {
 	
 }
 
+protocol ReplyMarkup {
+
+	func JSONEncode() -> String?
+	
+}
+
 /* Extension protocol. */
 extension Chat: Receivable {
 	
@@ -47,5 +53,33 @@ enum ChatAction: String {
 	case upload_audio
 	case upload_document
 	case find_location
+	
+}
+
+extension InlineKeyboardMarkup: ReplyMarkup {
+	
+	func JSONEncode() -> String? {
+		var JSONDictionary = [String: Any]()
+		var buttonsArray = [[Any]]()
+		for row in self.inline_keyboard {
+			var rowArray = [Any]()
+			for button in row {
+				var buttonDictionary = [String: Any]()
+				guard button.url != nil || button.callback_data != nil || button.switch_inline_query != nil else { continue }
+				buttonDictionary["text"] = button.text
+				if let url = button.url { buttonDictionary["url"] = url }
+				if let callback_data = button.callback_data { buttonDictionary["callback_data"] = callback_data }
+				if let switch_inline_query = button.switch_inline_query { buttonDictionary["switch_inline_query"] = switch_inline_query }
+				rowArray.append(buttonDictionary)
+			}
+			buttonsArray.append(rowArray)
+		}
+		JSONDictionary["inline_keyboard"] = buttonsArray
+		do {
+			return try JSONDictionary.jsonEncodedString()
+		} catch {
+			return nil
+		}
+	}
 	
 }

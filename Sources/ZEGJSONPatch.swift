@@ -373,3 +373,52 @@ private class ZEGJSONDecodeState {
 		pushBack = next!
 	}
 }
+
+func ZEGJSONEncoding(dictionary: Dictionary<String, Any>) throws -> String {
+	
+	var s = "{"
+	
+	var first = true
+	
+	for (k, v) in dictionary {
+		if !first {
+			s.appendContentsOf(",")
+		} else {
+			first = false
+		}
+		s.appendContentsOf(try k.jsonEncodedString())
+		s.appendContentsOf(":")
+		s.appendContentsOf(try ZEGJsonEncodedStringWorkAround(v))
+	}
+	
+	s.appendContentsOf("}")
+	return s
+
+}
+
+func ZEGJsonEncodedStringWorkAround(o: Any) throws -> String {
+	switch o {
+	case let jsonAble as JSONConvertibleObject: // as part of Linux work around
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as JSONConvertible:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as String:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as Int:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as UInt:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as Double:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as Bool:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as [Any]:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as [[Any]]:
+		return try jsonAble.jsonEncodedString()
+	case let jsonAble as [String:Any]:
+		return try jsonAble.jsonEncodedString()
+	default:
+		throw JSONConversionError.NotConvertible(o)
+	}
+}

@@ -203,6 +203,22 @@ public class ZEGResponse {
 		
 	}
 	
+	static func editMessageText(message: Message, to text: String, parse_mode: ParseMode?, disable_web_page_preview: Bool?, disable_notification: Bool?, reply_markup: ReplyMarkup?) {
+		
+		var params = [String: String]()
+		
+		params["message_id"] = "\(message.message_id)"
+		params["chat_id"] = "\(message.chat.id)"
+		params["text"] = text
+		if let parse_mode = parse_mode { params["parse_mode"] = parse_mode.rawValue }
+		if let disable_web_page_preview = disable_web_page_preview { params["disable_web_page_preview"] = "\(disable_web_page_preview)" }
+		if let disable_notification = disable_notification { params["disable_notification"] = "\(disable_notification)" }
+		if let reply_markup = reply_markup { params["reply_markup"] = reply_markup.JSONEncode() }
+		
+		performResponse("editMessageText", params: params)
+		
+	}
+	
 	static private func performResponse(method: String, params: [String: String]) {
 
 		var paramsStr = "?"

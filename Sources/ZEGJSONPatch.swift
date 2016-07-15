@@ -374,29 +374,33 @@ private class ZEGJSONDecodeState {
 	}
 }
 
-func ZEGJSONEncoding(dictionary: Dictionary<String, Any>) throws -> String {
-	
-	var s = "{"
-	
-	var first = true
-	
-	for (k, v) in dictionary {
-		if !first {
-			s.appendContentsOf(",")
-		} else {
-			first = false
+extension Dictionary {
+	public func ZEGJSONEncodedString() throws -> String {
+		var s = "{"
+		
+		var first = true
+		
+		for (k, v) in self {
+			guard let strKey = k as? String else {
+				throw JSONConversionError.InvalidKey(k)
+			}
+			if !first {
+				s.appendContentsOf(",")
+			} else {
+				first = false
+			}
+			s.appendContentsOf(try strKey.jsonEncodedString())
+			s.appendContentsOf(":")
+			s.appendContentsOf(try ZEGJSONEncodedStringWorkAround(v))
 		}
-		s.appendContentsOf(try k.jsonEncodedString())
-		s.appendContentsOf(":")
-		s.appendContentsOf(try ZEGJsonEncodedStringWorkAround(v))
+		
+		s.appendContentsOf("}")
+		return s
+		
 	}
-	
-	s.appendContentsOf("}")
-	return s
-
 }
 
-func ZEGJsonEncodedStringWorkAround(o: Any) throws -> String {
+func ZEGJSONEncodedStringWorkAround(o: Any) throws -> String {
 	switch o {
 	case let jsonAble as JSONConvertibleObject: // as part of Linux work around
 		return try jsonAble.jsonEncodedString()

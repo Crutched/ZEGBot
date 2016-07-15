@@ -76,7 +76,7 @@ extension InlineKeyboardMarkup: ReplyMarkup {
 		}
 		JSONDictionary["inline_keyboard"] = buttonsArray
 		do {
-			return try ZEGJSONEncoding(JSONDictionary)
+			return try JSONDictionary.ZEGJSONEncodedString()
 		} catch {
 			return nil
 		}

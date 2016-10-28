@@ -37,7 +37,7 @@ public struct ZEGBot {
 			
 			guard let updates = ZEGBot.decodeUpdates(from: responseBodyString) else { continue }
 			
-			if let lastUpdate = updates.last { offset = lastUpdate.update_id + 1 }
+			if let lastUpdate = updates.last { offset = lastUpdate.updateId + 1 }
 			
 			for update in updates {
 				Threading.dispatch {

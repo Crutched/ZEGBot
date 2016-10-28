@@ -10,31 +10,31 @@
 
 public struct Update {
 	
-	public var update_id: Int
+	public var updateId: Int
 	
 	/* Optional. */
 	public var message: Message?
-	public var edited_message: Message?
-	//	public var inline_query: InlineQuery?
-	//	public var chosen_inline_result: ChosenInlineResult?
-	//	public var callback_query: CallbackQuery?
+	public var editedMessage: Message?
+	//	public var inlineQuery: InlineQuery?
+	//	public var chosenInlineResult: ChosenInlineResult?
+	//	public var callbackQuery: CallbackQuery?
 	
 }
 
 
 public class Message {
 	
-	public var message_id: Int
+	public var messageId: Int
 	public var date: Int
 	public var chat: Chat
 	
 	/* Optional. */
 	public var from: User?
-	public var forward_from: User?
-	public var forward_from_chat: Chat?
-	public var forward_date: Int?
-	public var reply_to_message: Message?
-	public var edit_date: Int?
+	public var forwardFrom: User?
+	public var forwardFromChat: Chat?
+	public var forwardDate: Int?
+	public var replyToMessage: Message?
+	public var editDate: Int?
 	public var text: String?
 	public var entities: [MessageEntity]?
 	public var audio: Audio?
@@ -47,20 +47,20 @@ public class Message {
 	public var contact: Contact?
 	public var location: Location?
 	public var venue: Venue?
-	public var new_chat_member: User?
-	public var left_chat_member: User?
-	public var new_chat_title: String?
-	public var new_chat_photo: [PhotoSize]?
-	public var delete_chat_photo: Bool?
-	public var group_chat_created: Bool?
-	public var supergroup_chat_created: Bool?
-	public var channel_chat_created: Bool?
-	public var migrate_to_chat_id: Int?
-	public var migrate_from_chat_id: Int?
-	public var pinned_message: Message?
+	public var newChatMember: User?
+	public var leftChatMember: User?
+	public var newChatTitle: String?
+	public var newChatPhoto: [PhotoSize]?
+	public var deleteChatPhoto: Bool?
+	public var groupChatCreated: Bool?
+	public var supergroupChatCreated: Bool?
+	public var channelChatCreated: Bool?
+	public var migrateToChatId: Int?
+	public var migrateFromChatId: Int?
+	public var pinnedMessage: Message?
 	
 	public init() {
-		self.message_id = 0
+		self.messageId = 0
 		self.date = 0
 		self.chat = Chat(id: 0, type: .PRIVATE)
 	}
@@ -76,8 +76,8 @@ public struct Chat {
 	/* Optional. */
 	public var title: String?
 	public var username: String?
-	public var first_name: String?
-	public var last_name: String?
+	public var firstName: String?
+	public var lastName: String?
 	
 	public init(id: Int, type: sType) {
 		
@@ -103,21 +103,21 @@ public struct Chat {
 public struct User {
 	
 	public var id: Int
-	public var first_name: String
+	public var firstName: String
 	
 	/* OPTIONAL. */
-	public var last_name: String?
+	public var lastName: String?
 	public var username: String?
 	
 	public init(id: Int,
-	            first_name: String,
-	            last_name: String? = nil,
+	            firstName: String,
+	            lastName: String? = nil,
 	            username: String? = nil
 		) {
 		
 		self.id = id
-		self.first_name = first_name
-		self.last_name = last_name
+		self.firstName = firstName
+		self.lastName = lastName
 		self.username = username
 		
 	}
@@ -142,7 +142,7 @@ public struct MessageEntity {
 			self = instance
 		}
 		
-		case MENTION, HASHTAG, BOT_COMMAND, URL, EMAIL, BOLD, ITALIC, CODE, PRE, TEXT_LINK, TEXT_MENTION
+		case MENTION, HASHTAG, BOTCOMMAND, URL, EMAIL, BOLD, ITALIC, CODE, PRE, TEXTLINK, TEXTMENTION
 		
 	}
 	
@@ -151,29 +151,29 @@ public struct MessageEntity {
 
 public struct Audio {
 	
-	public var file_id: String
+	public var fileId: String
 	public var duration: Int
 	
 	/* OPTIONAL. */
 	public var performer: String?
 	public var title: String?
-	public var mime_type: String?
-	public var file_size: Int?
+	public var mimeType: String?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            duration: Int,
 	            performer: String? = nil,
 	            title: String? = nil,
-	            mime_type: String? = nil,
-	            file_size: Int? = nil
+	            mimeType: String? = nil,
+	            fileSize: Int? = nil
 		) {
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.duration = duration
 		self.performer = performer
 		self.title = title
-		self.mime_type = mime_type
-		self.file_size = file_size
+		self.mimeType = mimeType
+		self.fileSize = fileSize
 		
 	}
 	
@@ -182,26 +182,26 @@ public struct Audio {
 
 public struct Document {
 	
-	public var file_id: String
+	public var fileId: String
 	
 	/* OPTIONAL. */
 	public var thumb: PhotoSize?
-	public var file_name: String?
-	public var mime_type: String?
-	public var file_size: Int?
+	public var fileName: String?
+	public var mimeType: String?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            thumb: PhotoSize? = nil,
-	            file_name: String? = nil,
-	            mime_type: String? = nil,
-	            file_size: Int? = nil
+	            fileName: String? = nil,
+	            mimeType: String? = nil,
+	            fileSize: Int? = nil
 		) {
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.thumb = thumb
-		self.file_name = file_name
-		self.mime_type = mime_type
-		self.file_size = file_size
+		self.fileName = fileName
+		self.mimeType = mimeType
+		self.fileSize = fileSize
 		
 	}
 	
@@ -210,23 +210,23 @@ public struct Document {
 
 public struct PhotoSize {
 	
-	public var file_id: String
+	public var fileId: String
 	public var width: Int
 	public var height: Int
 	
 	/* Optional. */
-	public var file_size: Int?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            width: Int,
 	            height: Int,
-	            file_size: Int? = nil
+	            fileSize: Int? = nil
 		){
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.width = width
 		self.height = height
-		self.file_size = file_size
+		self.fileSize = fileSize
 		
 	}
 	
@@ -235,29 +235,29 @@ public struct PhotoSize {
 
 public struct Sticker {
 	
-	public var file_id: String
+	public var fileId: String
 	public var width: Int
 	public var height: Int
 	
 	/* Optional. */
 	public var thumb: PhotoSize?
 	public var emoji: String?
-	public var file_size: Int?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            width: Int,
 	            height: Int,
 	            thumb: PhotoSize? = nil,
 	            emoji: String? = nil,
-	            file_size: Int? = nil
+	            fileSize: Int? = nil
 		) {
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.width = width
 		self.height = height
 		self.thumb = thumb
 		self.emoji = emoji
-		self.file_size = file_size
+		self.fileSize = fileSize
 		
 	}
 	
@@ -266,32 +266,32 @@ public struct Sticker {
 
 public struct Video {
 	
-	public var file_id: String
+	public var fileId: String
 	public var width: Int
 	public var height: Int
 	public var duration: Int
 	
 	/* OPTIONAL. */
 	public var thumb: PhotoSize?
-	public var mime_type: String?
-	public var file_size: Int?
+	public var mimeType: String?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            width: Int,
 	            height: Int,
 	            duration: Int,
 	            thumb: PhotoSize? = nil,
-	            mime_type: String? = nil,
-	            file_size: Int? = nil
+	            mimeType: String? = nil,
+	            fileSize: Int? = nil
 		){
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.width = width
 		self.height = height
 		self.duration = duration
 		self.thumb = thumb
-		self.mime_type = mime_type
-		self.file_size = file_size
+		self.mimeType = mimeType
+		self.fileSize = fileSize
 		
 	}
 	
@@ -300,23 +300,23 @@ public struct Video {
 
 public struct Voice {
 	
-	public var file_id: String
+	public var fileId: String
 	public var duration: Int
 	
 	/* Optional. */
-	public var mime_type: String?
-	public var file_size: Int?
+	public var mimeType: String?
+	public var fileSize: Int?
 	
-	public init(file_id: String,
+	public init(fileId: String,
 	            duration: Int,
-	            mime_type: String? = nil,
-	            file_size: Int? = nil
+	            mimeType: String? = nil,
+	            fileSize: Int? = nil
 		) {
 		
-		self.file_id = file_id
+		self.fileId = fileId
 		self.duration = duration
-		self.mime_type = mime_type
-		self.file_size = file_size
+		self.mimeType = mimeType
+		self.fileSize = fileSize
 		
 	}
 	
@@ -325,23 +325,23 @@ public struct Voice {
 
 public struct Contact {
 	
-	public var phone_number: String
-	public var first_name: String
+	public var phoneNumber: String
+	public var firstName: String
 	
 	/* OPTIONAL. */
-	public var last_name: String?
-	public var user_id: Int?
+	public var lastName: String?
+	public var userId: Int?
 	
-	public init(phone_number: String,
-	            first_name: String,
-	            last_name: String? = nil,
-	            user_id: Int? = nil
+	public init(phoneNumber: String,
+	            firstName: String,
+	            lastName: String? = nil,
+	            userId: Int? = nil
 		) {
 		
-		self.phone_number = phone_number
-		self.first_name = first_name
-		self.last_name = last_name
-		self.user_id = user_id
+		self.phoneNumber = phoneNumber
+		self.firstName = firstName
+		self.lastName = lastName
+		self.userId = userId
 		
 	}
 	
@@ -371,18 +371,18 @@ public struct Venue {
 	public var address: String
 	
 	/* OPTIONAL. */
-	public var foursquare_id: String?
+	public var foursquareId: String?
 	
 	public init(location: Location,
 	            title: String,
 	            address: String,
-	            foursquare_id: String? = nil
+	            foursquareId: String? = nil
 		) {
 		
 		self.location = location
 		self.title = title
 		self.address = address
-		self.foursquare_id = foursquare_id
+		self.foursquareId = foursquareId
 		
 	}
 	
@@ -395,11 +395,11 @@ public enum ParseMode: String {
 
 public enum ChatAction: String {
 	case TYPING
-	case UPLOAD_PHOTO
-	case RECORD_VIDEO
-	case UPLOAD_VIDEO
-	case RECORD_AUDIO
-	case UPLOAD_AUDIO
-	case UPLOAD_DOCUMENT
-	case FIND_LOCATION
+	case UPLOADPHOTO
+	case RECORDVIDEO
+	case UPLOADVIDEO
+	case RECORDAUDIO
+	case UPLOADAUDIO
+	case UPLOADDOCUMENT
+	case FINDLOCATION
 }

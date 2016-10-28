@@ -38,9 +38,9 @@ extension Update: JSONConvertible {
 				
 		}
 		
-		self.update_id = updateId
+		self.updateId = updateId
 		self.message = Message(from: jsonDictionary[PARAM.MESSAGE])
-		self.edited_message = Message(from: jsonDictionary[PARAM.EDITED_MESSAGE])
+		self.editedMessage = Message(from: jsonDictionary[PARAM.EDITED_MESSAGE])
 		
 	}
 	
@@ -66,15 +66,15 @@ extension Message {
 				
 		}
 		
-		self.message_id = messageId
+		self.messageId = messageId
 		self.date = date
 		self.chat = chat
 		self.from = User(from: jsonDictionary[PARAM.FROM])
-		self.forward_from = User(from: jsonDictionary[PARAM.FORWARD_FROM])
-		self.forward_from_chat = Chat(from: jsonDictionary[PARAM.FORWARD_FROM_CHAT])
-		self.forward_date = jsonDictionary[PARAM.FORWARD_DATE] as? Int
-		self.reply_to_message = Message(from: jsonDictionary[PARAM.REPLY_TO_MESSAGE])
-		self.edit_date = jsonDictionary[PARAM.EDIT_DATE] as? Int
+		self.forwardFrom = User(from: jsonDictionary[PARAM.FORWARD_FROM])
+		self.forwardFromChat = Chat(from: jsonDictionary[PARAM.FORWARD_FROM_CHAT])
+		self.forwardDate = jsonDictionary[PARAM.FORWARD_DATE] as? Int
+		self.replyToMessage = Message(from: jsonDictionary[PARAM.REPLY_TO_MESSAGE])
+		self.editDate = jsonDictionary[PARAM.EDIT_DATE] as? Int
 		self.text = jsonDictionary[PARAM.TEXT] as? String
 		self.entities = MessageEntity.array(from: jsonDictionary[PARAM.ENTITIES])
 		self.audio = Audio(from: jsonDictionary[PARAM.AUDIO])
@@ -87,17 +87,17 @@ extension Message {
 		self.contact = Contact(from: jsonDictionary[PARAM.CONTACT])
 		self.location = Location(from: jsonDictionary[PARAM.LOCATION])
 		self.venue = Venue(from: jsonDictionary[PARAM.VENUE])
-		self.new_chat_member = User(from: jsonDictionary[PARAM.NEW_CHAT_MEMBER])
-		self.left_chat_member = User(from: jsonDictionary[PARAM.LEFT_CHAT_MEMBER])
-		self.new_chat_title = jsonDictionary[PARAM.NEW_CHAT_TITLE] as? String
-		self.new_chat_photo = PhotoSize.array(from: jsonDictionary[PARAM.NEW_CHAT_PHOTO])
-		self.delete_chat_photo = jsonDictionary[PARAM.DELETE_CHAT_PHOTO] as? Bool
-		self.group_chat_created = jsonDictionary[PARAM.GROUP_CHAT_CREATED] as? Bool
-		self.supergroup_chat_created = jsonDictionary[PARAM.SUPER_GROUP_CHAT_CREATED] as? Bool
-		self.channel_chat_created = jsonDictionary[PARAM.CHANNEL_CHAT_CREATED] as? Bool
-		self.migrate_to_chat_id = jsonDictionary[PARAM.MIGRATE_TO_CHAT_ID] as? Int
-		self.migrate_from_chat_id = jsonDictionary[PARAM.MIGRATE_FROM_CHAT_ID] as? Int
-		self.pinned_message = Message(from: jsonDictionary[PARAM.PINNED_MESSAGE])
+		self.newChatMember = User(from: jsonDictionary[PARAM.NEW_CHAT_MEMBER])
+		self.leftChatMember = User(from: jsonDictionary[PARAM.LEFT_CHAT_MEMBER])
+		self.newChatTitle = jsonDictionary[PARAM.NEW_CHAT_TITLE] as? String
+		self.newChatPhoto = PhotoSize.array(from: jsonDictionary[PARAM.NEW_CHAT_PHOTO])
+		self.deleteChatPhoto = jsonDictionary[PARAM.DELETE_CHAT_PHOTO] as? Bool
+		self.groupChatCreated = jsonDictionary[PARAM.GROUP_CHAT_CREATED] as? Bool
+		self.supergroupChatCreated = jsonDictionary[PARAM.SUPER_GROUP_CHAT_CREATED] as? Bool
+		self.channelChatCreated = jsonDictionary[PARAM.CHANNEL_CHAT_CREATED] as? Bool
+		self.migrateToChatId = jsonDictionary[PARAM.MIGRATE_TO_CHAT_ID] as? Int
+		self.migrateFromChatId = jsonDictionary[PARAM.MIGRATE_FROM_CHAT_ID] as? Int
+		self.pinnedMessage = Message(from: jsonDictionary[PARAM.PINNED_MESSAGE])
 		
 	}
 	
@@ -124,8 +124,8 @@ extension Chat: JSONConvertible {
 		self.type = type
 		self.title = jsonDictionary[PARAM.TITLE] as? String
 		self.username = jsonDictionary[PARAM.USERNAME] as? String
-		self.first_name = jsonDictionary[PARAM.FIRST_NAME] as? String
-		self.last_name = jsonDictionary[PARAM.LAST_NAME] as? String
+		self.firstName = jsonDictionary[PARAM.FIRST_NAME] as? String
+		self.lastName = jsonDictionary[PARAM.LAST_NAME] as? String
 		
 	}
 	
@@ -149,8 +149,8 @@ extension User: JSONConvertible {
 		}
 		
 		self.id = id
-		self.first_name = firstName
-		self.last_name = jsonDictionary[PARAM.LAST_NAME] as? String
+		self.firstName = firstName
+		self.lastName = jsonDictionary[PARAM.LAST_NAME] as? String
 		self.username = jsonDictionary[PARAM.USERNAME] as? String
 		
 	}
@@ -230,12 +230,12 @@ extension Audio: JSONConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.duration = duration
 		self.performer = jsonDictionary[PARAM.PERFORMER] as? String
 		self.title = jsonDictionary[PARAM.TITLE] as? String
-		self.mime_type = jsonDictionary[PARAM.MIME_SIZE] as? String
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.mimeType = jsonDictionary[PARAM.MIME_SIZE] as? String
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -257,11 +257,11 @@ extension Document: JSONConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.thumb = PhotoSize(from: jsonDictionary[PARAM.THUMB])
-		self.file_name = jsonDictionary[PARAM.FILE_NAME] as? String
-		self.mime_type = jsonDictionary[PARAM.MIME_TYPE] as? String
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.fileName = jsonDictionary[PARAM.FILE_NAME] as? String
+		self.mimeType = jsonDictionary[PARAM.MIME_TYPE] as? String
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -285,10 +285,10 @@ extension PhotoSize: JSONConvertible, ArrayConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.width = width
 		self.height = height
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -341,12 +341,12 @@ extension Sticker: JSONConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.width = width
 		self.height = height
 		self.thumb = PhotoSize(from: jsonDictionary[PARAM.THUMB])
 		self.emoji = jsonDictionary[PARAM.EMOJI] as? String
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -371,13 +371,13 @@ extension Video: JSONConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.width = width
 		self.height = height
 		self.duration = duration
 		self.thumb = PhotoSize(from: jsonDictionary[PARAM.THUMB])
-		self.mime_type = jsonDictionary[PARAM.MIME_TYPE] as? String
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.mimeType = jsonDictionary[PARAM.MIME_TYPE] as? String
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -400,10 +400,10 @@ extension Voice: JSONConvertible {
 				
 		}
 		
-		self.file_id = fileId
+		self.fileId = fileId
 		self.duration = duration
-		self.mime_type = jsonDictionary[PARAM.MIME_TYPE] as? String
-		self.file_size = jsonDictionary[PARAM.FILE_SIZE] as? Int
+		self.mimeType = jsonDictionary[PARAM.MIME_TYPE] as? String
+		self.fileSize = jsonDictionary[PARAM.FILE_SIZE] as? Int
 		
 	}
 	
@@ -426,10 +426,10 @@ extension Contact: JSONConvertible {
 				
 		}
 		
-		self.phone_number = phoneNumber
-		self.first_name = firstName
-		self.last_name = jsonDictionary[PARAM.LAST_NAME] as? String
-		self.user_id = jsonDictionary[PARAM.USER_ID] as? Int
+		self.phoneNumber = phoneNumber
+		self.firstName = firstName
+		self.lastName = jsonDictionary[PARAM.LAST_NAME] as? String
+		self.userId = jsonDictionary[PARAM.USER_ID] as? Int
 		
 	}
 	
@@ -480,7 +480,7 @@ extension Venue: JSONConvertible {
 		self.location = location
 		self.title = title
 		self.address = address
-		self.foursquare_id = jsonDictionary[PARAM.FOURSQUARE_ID] as? String
+		self.foursquareId = jsonDictionary[PARAM.FOURSQUARE_ID] as? String
 		
 	}
 }

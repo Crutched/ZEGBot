@@ -27,6 +27,8 @@ extension ZEGBot {
 		static let TEXT =							"text"
 		static let PARSE_MODE =						"parse_mode"
 		static let DISABLE_WEB_PAGE_PREVIEW =		"disable_web_page_preview"
+        static let CHAT_ID =						"chat_id"
+        static let REPLY_TO_MESSAGE_ID =			"reply_to_message_id"
 		
 		static let FORWARD_MESSAGE =				"forwardMessage"
 		

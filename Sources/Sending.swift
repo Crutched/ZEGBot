@@ -15,7 +15,7 @@ public protocol Sendable {
 extension Chat: Sendable {
  
 	public var receiverIdentifier: [String: Any] {
-		return ["chat_id": self.id]
+		return [ZEGBot.PARAM.CHAT_ID: self.id]
 	}
 	
 }
@@ -23,7 +23,7 @@ extension Chat: Sendable {
 extension Message: Sendable {
 	
 	public var receiverIdentifier: [String: Any] {
-		return ["chat_id": self.chat.id, "reply_to_message_id": self.message_id]
+		return [ZEGBot.PARAM.CHAT_ID: self.chat.id, ZEGBot.PARAM.REPLY_TO_MESSAGE_ID: self.messageId]
 	}
 	
 }

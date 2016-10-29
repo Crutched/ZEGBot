@@ -18,7 +18,8 @@ extension String {
 
 extension Log {
 	
-	static func warning(on object: Any) {
+	static func warning(on object: Any?) {
+        guard let object = object else { return }
 		self.warning(message: "===>>>===<<<===")
 		self.warning(message: "Failed to convert:")
 		self.warning(message: "\(object)")
